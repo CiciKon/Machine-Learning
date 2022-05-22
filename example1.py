@@ -70,16 +70,30 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 # creating an object of LinearRegression class
 lr = LinearRegression()
 # fitting the training data
-lr.fit(X_train,y_train)
-print(lr.score(X_test,y_test))
+model = lr.fit(X_train,y_train)
 
 # make predictions
 y_pred = lr.predict(X_test)
 print(y_pred)
 
+## The line / model
+plt.scatter(y_test, y_pred)
+plt.title("Cars Data Set")
+plt.xlabel("True Values")
+plt.ylabel("Predictions")
+plt.show()
+
+print ("Score : ", model.score(X_test, y_test))
+
 # evaluate predictions
+coefficients = lr.coef_
+intercept = lr.intercept_
+
+y_pred = lr.predict(X_test)
+print("Coefficients: \n", coefficients)
 mae = mean_absolute_error(y_test, y_pred)
 print('MAE: %.3f' % mae)
+#print("Coefficient of determination: %.2f" % r2_score(y_test, y_pred))
 
 #Generate the confusion matrix
 cf_matrix = confusion_matrix(y_test, y_pred)
@@ -104,17 +118,6 @@ print(cf_matrix)
 #from sklearn.metrics import confusion_matrix
 #cm = confusion_matrix(y_test, y_pred_en)
 #print('Confusion matrix\n\n', cm)
-
-#regr = linear_model.LinearRegression()
-#regr.fit(x_train,y_train)
-
-#coefficients = regr.coef_
-#intercept = regr.intercept_
-
-#y_pred = regr.predict(x_test)
-#print("Coefficients: \n", coefficients)
-#print("Mean squared error: %.2f" % mean_squared_error(y_test, y_pred))
-#print("Coefficient of determination: %.2f" % r2_score(y_test, y_pred))
 
 #np.set_printoptions(precision=2)
 
