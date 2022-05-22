@@ -7,6 +7,7 @@ from statistics import median
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error
 
 
 df = pd.read_csv (r'D:\DAI\πτυχιακη\cars\data.csv')
@@ -62,16 +63,23 @@ test = df[num:]
 print ("Data:",len(df),", Train:",len(train),", Test:",len(test))
 
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(X.values, y, test_size = 0.2, random_state = 8)
+X_train, X_test, y_train, y_test = train_test_split(X.values, y, test_size = 0.2,
+                                random_state = 8)
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # creating an object of LinearRegression class
 lr = LinearRegression()
 # fitting the training data
-lr.fit(x_train,y_train)
-print(lr.score(x_test,y_test))
+lr.fit(X_train,y_train)
+print(lr.score(X_test,y_test))
 
-y_pred = lr.predict(x_test)
+# make predictions
+y_pred = lr.predict(X_test)
 print(y_pred)
+
+# evaluate predictions
+mae = mean_absolute_error(y_test, y_pred)
+print('MAE: %.3f' % mae)
 
 #Generate the confusion matrix
 cf_matrix = confusion_matrix(y_test, y_pred)
