@@ -5,7 +5,7 @@ from sklearn import datasets, svm
 from statistics import mean
 from statistics import median
 import matplotlib.pyplot as plt
-from sklearn import metrics
+from sklearn.metrics import confusion_matrix
 from sklearn.linear_model import LinearRegression
 
 
@@ -70,7 +70,13 @@ lr = LinearRegression()
 lr.fit(x_train,y_train)
 print(lr.score(x_test,y_test))
 
-print(lr.predict([[2011,300,6]]))
+y_pred = lr.predict(x_test)
+print(y_pred)
+
+#Generate the confusion matrix
+cf_matrix = confusion_matrix(y_test, y_pred)
+
+print(cf_matrix)
 
 #print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
